@@ -1,4 +1,5 @@
 *.o
-lele
+lele*
 test*
 bin
+Makefile
