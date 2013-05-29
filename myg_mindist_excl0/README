@@ -1,0 +1,40 @@
+COMPARING g_mindist & myg_mindist_exlc0 
+
+162c162
+<		      bool bPBC)
+---
+>		      bool bPBC, t_atoms *atoms)
+217c217
+<	if (r2 < rcut2)
+---
+>	if (r2 < rcut2 && (fabs(atoms->atom[ix].resnr - atoms->atom[jx].resnr) > 0))
+312c312
+<		  &dmin,&dmax,&nmin,&nmax,&min1,&min2,&max1,&max2,bPBC);
+---
+>		  &dmin,&dmax,&nmin,&nmax,&min1,&min2,&max1,&max2,bPBC,atoms);
+320c320
+<		      &dmin,&dmax,&nmin,&nmax,&min1,&min2,&max1,&max2,bPBC);
+---
+>		      &dmin,&dmax,&nmin,&nmax,&min1,&min2,&max1,&max2,bPBC,atoms);
+330c330
+<		  &dmin,&dmax,&nmin,&nmax,&min1,&min2,&max1,&max2,bPBC);
+---
+>		  &dmin,&dmax,&nmin,&nmax,&min1,&min2,&max1,&max2,bPBC,atoms);
+337c337
+<		      &dmin,&dmax,&nmin,&nmax,&min1,&min2,&max1,&max2,bPBC);
+---
+>		      &dmin,&dmax,&nmin,&nmax,&min1,&min2,&max1,&max2,bPBC,atoms);
+
+
+COMPARING myg_mindist_exlc0 & myg_mindist_exlc1
+
+217c217
+<	if (r2 < rcut2 && (fabs(atoms->atom[ix].resnr - atoms->atom[jx].resnr) > 0))
+---
+>	if (r2 < rcut2 && (fabs(atoms->atom[ix].resnr - atoms->atom[jx].resnr) > 1))
+
+
+To summarize, when calculating the distance between two atoms,
+    In g_mindist, the two atoms could be within the same residue,
+    In g_mindist_excl0, the two atoms have to be in two different residues,
+    In g_mindist_excl1, the two atoms have to be in two different residues that are not neighbours with each other.
